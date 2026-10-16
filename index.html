@@ -1,0 +1,321 @@
+<title>Sub-20 · 15 Nov</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: una columna estrecha tipo "hoja de pista"; cabecera con cuenta atrás, luego semanas en orden y tabla de ritmos al final. */
+:root {
+  --bg: #eef1f4;
+  --surface: #ffffff;
+  --ink: #15191f;
+  --muted: #5d6673;
+  --line: #d5dbe2;
+  --track: #c8381f;      /* tartán de pista */
+  --track-soft: #f6dcd5;
+  --done: #1f7a4d;
+  --done-soft: #d6eee1;
+  --optional: #7a6a1f;
+  --f-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151a; --surface: #1b2027; --ink: #e9edf2; --muted: #9aa4b2; --line: #2c333d;
+    --track: #ff6a4d; --track-soft: #3a211c; --done: #4fc58a; --done-soft: #17301f; --optional: #d8c46a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151a; --surface: #1b2027; --ink: #e9edf2; --muted: #9aa4b2; --line: #2c333d;
+  --track: #ff6a4d; --track-soft: #3a211c; --done: #4fc58a; --done-soft: #17301f; --optional: #d8c46a;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 680px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 64px; display: grid; gap: 28px; }
+
+header { display: grid; gap: 14px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(44px, 12vw, 72px); line-height: .9; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--track); }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; }
+.stat b { font-family: var(--f-display); font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 13px; margin-left: 4px; }
+.bar { height: 10px; background: var(--line); border-radius: 5px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--track); transition: width .3s ease; }
+.sync { font-size: 12px; color: var(--muted); }
+
+.week { display: grid; gap: 10px; }
+.week h2 { margin: 0; font-family: var(--f-display); font-size: 24px; font-weight: 700; letter-spacing: .01em; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.week h2 small { font-family: var(--f-body); font-size: 13px; font-weight: 500; color: var(--muted); }
+
+.s { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 14px 14px 12px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+.s.is-next { border-color: var(--track); box-shadow: 0 0 0 1px var(--track); }
+.s.is-done { background: var(--done-soft); border-color: transparent; }
+.s.is-done .title { text-decoration: line-through; text-decoration-color: var(--done); text-decoration-thickness: 2px; }
+.check { width: 30px; height: 30px; margin-top: 2px; appearance: none; -webkit-appearance: none; border: 2px solid var(--muted); border-radius: 7px; cursor: pointer; display: grid; place-content: center; background: var(--surface); }
+.check::after { content: ""; width: 12px; height: 7px; border: 3px solid transparent; border-top: 0; border-right: 0; transform: rotate(-45deg) translate(1px, -1px); }
+.check:checked { background: var(--done); border-color: var(--done); }
+.check:checked::after { border-color: #fff; }
+.check:focus-visible { outline: 3px solid var(--track); outline-offset: 2px; }
+.body { min-width: 0; display: grid; gap: 6px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 13px; color: var(--muted); }
+.date { font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.chip { font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: var(--track-soft); color: var(--track); }
+.chip.easy { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+.chip.opt { background: transparent; color: var(--optional); border: 1px dashed var(--optional); }
+.chip.race { background: var(--track); color: var(--surface); }
+.flag { font-family: var(--f-mono); font-size: 11px; color: var(--track); font-weight: 500; }
+.title { font-weight: 600; font-size: 17px; margin: 0; }
+ol.steps { margin: 0; padding-left: 18px; display: grid; gap: 2px; }
+ol.steps li::marker { color: var(--muted); font-family: var(--f-mono); font-size: 12px; }
+.pace { font-family: var(--f-mono); font-size: 13px; white-space: nowrap; }
+.tip { font-size: 13px; color: var(--muted); margin: 0; }
+.note { width: 100%; box-sizing: border-box; font: inherit; font-size: 14px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); }
+.note:focus-visible { outline: 2px solid var(--track); outline-offset: 1px; }
+
+.ref { display: grid; gap: 10px; }
+.ref h2 { margin: 0; font-family: var(--f-display); font-size: 24px; }
+.tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 8px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 500; }
+td { font-family: var(--f-mono); font-size: 13px; }
+tr.goal td { color: var(--track); font-weight: 500; }
+tr:last-child td { border-bottom: 0; }
+.rules { margin: 0; padding-left: 18px; display: grid; gap: 4px; color: var(--muted); font-size: 14px; }
+.rules b { color: var(--ink); font-weight: 600; }
+.reset { justify-self: start; font: inherit; font-size: 13px; background: none; border: 1px solid var(--line); color: var(--muted); padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+.reset:focus-visible { outline: 2px solid var(--track); }
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">5K · domingo 15 de noviembre</div>
+    <h1>Bajar de <em>20:00</em></h1>
+    <div class="stats">
+      <div class="stat"><b id="days">–</b><span id="days-label">días para la carrera</span></div>
+      <div class="stat"><b id="count">0/0</b><span>sesiones clave hechas</span></div>
+      <div class="stat"><b>4:00</b><span>/km objetivo</span></div>
+    </div>
+    <div class="bar" role="progressbar" aria-label="Progreso del plan" aria-valuemin="0" aria-valuemax="100" id="bar"><i></i></div>
+    <div class="sync" id="sync">Tus checks se guardan en este dispositivo.</div>
+  </header>
+
+  <main id="plan"></main>
+
+  <section class="ref">
+    <h2>Ritmos de referencia</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Ritmo /km</th><th>200 m</th><th>400 m</th><th>800 m</th><th>1000 m</th><th>5 km</th></tr></thead>
+        <tbody>
+          <tr><td>3:45</td><td>0:45</td><td>1:30</td><td>3:00</td><td>3:45</td><td>18:45</td></tr>
+          <tr><td>3:50</td><td>0:46</td><td>1:32</td><td>3:04</td><td>3:50</td><td>19:10</td></tr>
+          <tr><td>3:55</td><td>0:47</td><td>1:34</td><td>3:08</td><td>3:55</td><td>19:35</td></tr>
+          <tr class="goal"><td>4:00 objetivo</td><td>0:48</td><td>1:36</td><td>3:12</td><td>4:00</td><td>20:00</td></tr>
+          <tr><td>4:15 tempo</td><td>0:51</td><td>1:42</td><td>3:24</td><td>4:15</td><td>21:15</td></tr>
+          <tr><td>5:15 suave</td><td>1:03</td><td>2:06</td><td>4:12</td><td>5:15</td><td>26:15</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="rules">
+      <li><b>Suave es suave.</b> En los rodajes tienes que poder hablar. Si no, vas demasiado rápido.</li>
+      <li><b>Las series, iguales.</b> La última tiene que salir al mismo ritmo que la primera. Si te hundes, sales más lento la próxima vez.</li>
+      <li><b>Nunca dos días duros seguidos.</b> Si mueves una sesión, deja al menos un día suave o de descanso en medio.</li>
+      <li><b>Rectas</b> = 80–100 m acelerando hasta ritmo rápido pero suelto, vuelta andando.</li>
+      <li><b>Las opcionales</b> solo si vas fresco. Saltarlas no rompe el plan.</li>
+    </ul>
+    <button class="reset" id="reset" type="button">Borrar todos los checks</button>
+  </section>
+</div>
+
+<script>
+const RACE = "2026-11-15";
+const PLAN = [
+  { week: "Arranque", range: "16–18 oct", sessions: [
+    { id: "d1016", date: "2026-10-16", kind: "series", title: "3 × 400 m — corto y cañero", km: "≈ 2,8 km",
+      steps: ["1 km muy suave + movilidad + 2 rectas", "3 × 400 m a <span class='pace'>1:30–1:33</span> (3:45–3:52/km)", "Recuperación: 1:30 andando o trotando entre series", "600–800 m de trote para soltar"],
+      tip: "Primer día: rápido pero controlado. El tercero tiene que salir igual que el primero." },
+    { id: "d1018", date: "2026-10-18", kind: "easy", title: "Rodaje suave 5 km", km: "5 km",
+      steps: ["5 km a <span class='pace'>5:15–5:30/km</span>, conversacional"] },
+  ]},
+  { week: "Semana 1", range: "19–25 oct · base de velocidad", sessions: [
+    { id: "d1020", date: "2026-10-20", kind: "series", title: "6 × 400 m", km: "≈ 5,5 km",
+      steps: ["1,5 km suave + 3 rectas", "6 × 400 m a <span class='pace'>1:30–1:32</span>", "Recuperación: 1:30 trotando", "1 km suave"] },
+    { id: "d1022", date: "2026-10-22", kind: "easy", title: "Rodaje 6 km + rectas", km: "6 km",
+      steps: ["6 km a <span class='pace'>5:15–5:30/km</span>", "Al final, 4 rectas de 80 m"] },
+    { id: "d1024", date: "2026-10-24", kind: "tempo", title: "Tempo 3 km", km: "≈ 5,5 km",
+      steps: ["1,5 km suave", "3 km seguidos a <span class='pace'>4:15/km</span>", "1 km suave"],
+      tip: "Exigente pero sostenible: podrías aguantar ese ritmo 20 minutos." },
+    { id: "d1025", date: "2026-10-25", kind: "optional", title: "Rodaje 30′ muy suave", km: "≈ 5 km",
+      steps: ["30 minutos a ritmo cómodo, sin mirar el reloj"] },
+  ]},
+  { week: "Semana 2", range: "26 oct – 1 nov · ritmo de carrera", sessions: [
+    { id: "d1027", date: "2026-10-27", kind: "series", title: "5 × 800 m", km: "≈ 7 km",
+      steps: ["1,5 km suave + 3 rectas", "5 × 800 m a <span class='pace'>3:08–3:12</span> (3:55–4:00/km)", "Recuperación: 2:00 trotando", "1 km suave"],
+      tip: "Esto es el ritmo de carrera en trozos. Aprende a sentirlo." },
+    { id: "d1029", date: "2026-10-29", kind: "easy", title: "Rodaje 6 km + rectas", km: "6 km",
+      steps: ["6 km a <span class='pace'>5:15–5:30/km</span>", "4 rectas de 80 m"] },
+    { id: "d1031", date: "2026-10-31", kind: "test", title: "Test 3 km a tope", km: "≈ 6 km",
+      steps: ["2 km suave + 3 rectas", "3 km a tope, ritmo uniforme", "1 km suave"],
+      tip: "Si bajas de 11:45 (≈ 3:55/km), el sub-20 está a tiro. Apunta tu tiempo aquí abajo." },
+    { id: "d1101", date: "2026-11-01", kind: "optional", title: "Rodaje 30–35′ suave", km: "≈ 6 km",
+      steps: ["30–35 minutos cómodos"] },
+  ]},
+  { week: "Semana 3", range: "2–8 nov · semana más dura", sessions: [
+    { id: "d1103", date: "2026-11-03", kind: "series", title: "4 × 1000 m", km: "≈ 7,5 km",
+      steps: ["1,5 km suave + 3 rectas", "4 × 1000 m a <span class='pace'>3:55–3:58</span>", "Recuperación: 2:00 trotando", "1 km suave"] },
+    { id: "d1105", date: "2026-11-05", kind: "easy", title: "Rodaje 6–7 km + rectas", km: "6–7 km",
+      steps: ["6–7 km a <span class='pace'>5:15–5:30/km</span>", "4 rectas de 80 m"] },
+    { id: "d1107", date: "2026-11-07", kind: "tempo", title: "Tempo 2 × 2 km", km: "≈ 7 km",
+      steps: ["1,5 km suave", "2 × 2 km a <span class='pace'>4:05/km</span>", "Recuperación: 2:00 trotando", "1 km suave"] },
+    { id: "d1108", date: "2026-11-08", kind: "optional", title: "Rodaje 30′ suave", km: "≈ 5 km",
+      steps: ["30 minutos cómodos"] },
+  ]},
+  { week: "Semana de carrera", range: "9–15 nov · descargar y llegar fresco", sessions: [
+    { id: "d1110", date: "2026-11-10", kind: "series", title: "3 × 1000 m", km: "≈ 6 km",
+      steps: ["1,5 km suave + 3 rectas", "3 × 1000 m a <span class='pace'>3:55</span>", "Recuperación: 2:30 trotando", "1 km suave"],
+      tip: "Menos volumen, misma calidad. Debe dejarte con ganas." },
+    { id: "d1112", date: "2026-11-12", kind: "easy", title: "Rodaje 4 km + rectas", km: "4 km",
+      steps: ["4 km suaves", "4 rectas de 80 m"] },
+    { id: "d1114", date: "2026-11-14", kind: "easy", title: "Activación", km: "≈ 3 km",
+      steps: ["15–20′ muy suave", "3 × 200 m a ritmo de carrera (<span class='pace'>0:48</span>), recuperación andando"],
+      tip: "Prepara la ropa y el dorsal. Cena normal, nada nuevo." },
+    { id: "d1115", date: "2026-11-15", kind: "race", title: "CARRERA 5K · < 20:00", km: "5 km",
+      steps: ["Calentamiento: 1,5 km suave + 3 rectas, 10–15′ antes de la salida", "Km 1 en <span class='pace'>3:58–4:00</span>. No salgas a 3:40 por la euforia", "Km 2–4 clavados a <span class='pace'>4:00</span>, es donde se gana o se pierde", "Último km: todo lo que quede"],
+      tip: "Apunta aquí tu tiempo final." },
+  ]},
+];
+
+const LABEL = { series: "Series", easy: "Suave", tempo: "Tempo", test: "Test", optional: "Opcional", race: "Carrera" };
+const CHIP = { series: "", tempo: "", test: "", easy: "easy", optional: "opt", race: "race" };
+const DOW = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
+const MON = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const LS_KEY = "runup-sub20-v1";
+
+let state = { done: {}, notes: {} };
+let docRef = null;
+
+function todayISO() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+function fmtDate(iso) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(y, m - 1, d);
+  return `${DOW[dt.getDay()]} ${d} ${MON[m - 1]}`;
+}
+function daysBetween(a, b) {
+  const [y1, m1, d1] = a.split("-").map(Number), [y2, m2, d2] = b.split("-").map(Number);
+  return Math.round((Date.UTC(y2, m2 - 1, d2) - Date.UTC(y1, m1 - 1, d1)) / 86400000);
+}
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function render() {
+  const today = todayISO();
+  const all = PLAN.flatMap(w => w.sessions);
+  const next = all.find(s => !state.done[s.id] && s.date >= today);
+  const root = document.getElementById("plan");
+  root.innerHTML = PLAN.map(w => `
+    <section class="week">
+      <h2>${w.week}<small>${w.range}</small></h2>
+      ${w.sessions.map(s => {
+        const done = !!state.done[s.id];
+        const isNext = next && next.id === s.id;
+        const flag = s.date === today ? "HOY" : (isNext ? "PRÓXIMA" : "");
+        return `
+        <article class="s${done ? " is-done" : ""}${isNext && !done ? " is-next" : ""}">
+          <input type="checkbox" class="check" id="c-${s.id}" data-id="${s.id}" ${done ? "checked" : ""} aria-label="Hecho: ${esc(s.title)}">
+          <div class="body">
+            <div class="meta">
+              <span class="date">${fmtDate(s.date)}</span>
+              <span class="chip ${CHIP[s.kind]}">${LABEL[s.kind]}</span>
+              <span>${s.km}</span>
+              ${flag ? `<span class="flag">● ${flag}</span>` : ""}
+            </div>
+            <label class="title" for="c-${s.id}">${esc(s.title)}</label>
+            <ol class="steps">${s.steps.map(x => `<li>${x}</li>`).join("")}</ol>
+            ${s.tip ? `<p class="tip">${s.tip}</p>` : ""}
+            <input class="note" id="n-${s.id}" data-id="${s.id}" placeholder="Tiempos / sensaciones" value="${esc(state.notes[s.id] || "")}">
+          </div>
+        </article>`;
+      }).join("")}
+    </section>`).join("");
+
+  const key = all.filter(s => s.kind !== "optional");
+  const doneKey = key.filter(s => state.done[s.id]).length;
+  document.getElementById("count").textContent = `${doneKey}/${key.length}`;
+  document.querySelector("#bar i").style.width = `${Math.round(doneKey / key.length * 100)}%`;
+  document.getElementById("bar").setAttribute("aria-valuenow", Math.round(doneKey / key.length * 100));
+  const d = daysBetween(today, RACE);
+  document.getElementById("days").textContent = d > 0 ? d : (d === 0 ? "HOY" : "✓");
+  document.getElementById("days-label").textContent = d > 0 ? (d === 1 ? "día para la carrera" : "días para la carrera") : (d === 0 ? "es el día" : "carrera hecha");
+}
+
+function saveLocal() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+}
+function loadLocal() {
+  try { const raw = localStorage.getItem(LS_KEY); if (raw) state = Object.assign({ done: {}, notes: {} }, JSON.parse(raw)); } catch (e) {}
+}
+
+// Escrituras a la base compartida, de una en una.
+let writing = false, pending = false;
+async function saveRemote() {
+  if (!docRef) return;
+  if (writing) { pending = true; return; }
+  writing = true;
+  try { await docRef.set({ done: state.done, notes: state.notes }); }
+  catch (e) { document.getElementById("sync").textContent = "No se pudo guardar en la nube; queda guardado en este dispositivo."; }
+  writing = false;
+  if (pending) { pending = false; saveRemote(); }
+}
+function save() { saveLocal(); saveRemote(); }
+
+document.getElementById("plan").addEventListener("change", e => {
+  const id = e.target.dataset.id;
+  if (!id) return;
+  if (e.target.classList.contains("check")) {
+    if (e.target.checked) state.done[id] = true; else delete state.done[id];
+    save(); render();
+  } else if (e.target.classList.contains("note")) {
+    const v = e.target.value.trim();
+    if (v) state.notes[id] = v; else delete state.notes[id];
+    save();
+  }
+});
+
+let confirmReset = false;
+document.getElementById("reset").addEventListener("click", e => {
+  if (!confirmReset) { confirmReset = true; e.target.textContent = "¿Seguro? Pulsa otra vez para borrar"; setTimeout(() => { confirmReset = false; e.target.textContent = "Borrar todos los checks"; }, 4000); return; }
+  confirmReset = false; e.target.textContent = "Borrar todos los checks";
+  state = { done: {}, notes: {} }; save(); render();
+});
+
+loadLocal();
+render();
+
+(async () => {
+  if (!window.claude || !window.claude.use) return;
+  const db = await window.claude.use("db");
+  if (!db) return;
+  docRef = db.doc("progress/main");
+  document.getElementById("sync").textContent = "Sincronizado: tus checks se guardan en la nube.";
+  let first = true;
+  docRef.onSnapshot(snap => {
+    if (snap.exists) {
+      const d = snap.data();
+      const editing = document.activeElement && document.activeElement.classList.contains("note");
+      state = { done: { ...(d.done || {}) }, notes: { ...(d.notes || {}) } };
+      saveLocal();
+      if (!editing) render();
+    } else if (first && (Object.keys(state.done).length || Object.keys(state.notes).length)) {
+      saveRemote(); // sube lo que ya hubiera en este dispositivo
+    }
+    first = false;
+  }, () => { document.getElementById("sync").textContent = "Sin conexión con la nube; se guarda en este dispositivo."; });
+})();
+</script>

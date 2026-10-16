@@ -98,7 +98,7 @@ tr:last-child td { border-bottom: 0; }
     <div class="stats">
       <div class="stat"><b id="days">–</b><span id="days-label">días para la carrera</span></div>
       <div class="stat"><b id="count">0/0</b><span>sesiones clave hechas</span></div>
-      <div class="stat"><b>4:00</b><span>/km objetivo</span></div>
+      <div class="stat"><b>3:59</b><span>/km objetivo</span></div>
     </div>
     <div class="bar" role="progressbar" aria-label="Progreso del plan" aria-valuemin="0" aria-valuemax="100" id="bar"><i></i></div>
     <div class="sync" id="sync">Tus checks se guardan en este dispositivo.</div>
@@ -115,7 +115,8 @@ tr:last-child td { border-bottom: 0; }
           <tr><td>3:45</td><td>0:45</td><td>1:30</td><td>3:00</td><td>3:45</td><td>18:45</td></tr>
           <tr><td>3:50</td><td>0:46</td><td>1:32</td><td>3:04</td><td>3:50</td><td>19:10</td></tr>
           <tr><td>3:55</td><td>0:47</td><td>1:34</td><td>3:08</td><td>3:55</td><td>19:35</td></tr>
-          <tr class="goal"><td>4:00 objetivo</td><td>0:48</td><td>1:36</td><td>3:12</td><td>4:00</td><td>20:00</td></tr>
+          <tr class="goal"><td>3:59 objetivo</td><td>0:48</td><td>1:36</td><td>3:11</td><td>3:59</td><td>19:55</td></tr>
+          <tr><td>4:00</td><td>0:48</td><td>1:36</td><td>3:12</td><td>4:00</td><td>20:00</td></tr>
           <tr><td>4:15 tempo</td><td>0:51</td><td>1:42</td><td>3:24</td><td>4:15</td><td>21:15</td></tr>
           <tr><td>5:15 suave</td><td>1:03</td><td>2:06</td><td>4:12</td><td>5:15</td><td>26:15</td></tr>
         </tbody>
@@ -155,7 +156,7 @@ const PLAN = [
   ]},
   { week: "Semana 2", range: "26 oct – 1 nov · ritmo de carrera", sessions: [
     { id: "d1027", date: "2026-10-27", kind: "series", title: "5 × 800 m", km: "≈ 7 km",
-      steps: ["1,5 km suave + 3 rectas", "5 × 800 m a <span class='pace'>3:08–3:12</span> (3:55–4:00/km)", "Recuperación: 2:00 trotando", "1 km suave"],
+      steps: ["1,5 km suave + 3 rectas", "5 × 800 m a <span class='pace'>3:08–3:11</span> (3:55–3:59/km)", "Recuperación: 2:00 trotando", "1 km suave"],
       tip: "Esto es el ritmo de carrera en trozos. Aprende a sentirlo." },
     { id: "d1029", date: "2026-10-29", kind: "easy", title: "Rodaje 6 km + rectas", km: "6 km",
       steps: ["6 km a <span class='pace'>5:15–5:30/km</span>", "4 rectas de 80 m"] },
@@ -185,7 +186,7 @@ const PLAN = [
       steps: ["15–20′ muy suave", "3 × 200 m a ritmo de carrera (<span class='pace'>0:48</span>), recuperación andando"],
       tip: "Prepara la ropa y el dorsal. Cena normal, nada nuevo." },
     { id: "d1115", date: "2026-11-15", kind: "race", title: "CARRERA 5K · < 20:00", km: "5 km",
-      steps: ["Calentamiento: 1,5 km suave + 3 rectas, 10–15′ antes de la salida", "Km 1 en <span class='pace'>3:58–4:00</span>. No salgas a 3:40 por la euforia", "Km 2–4 clavados a <span class='pace'>4:00</span>, es donde se gana o se pierde", "Último km: todo lo que quede"],
+      steps: ["Calentamiento: 1,5 km suave + 3 rectas, 10–15′ antes de la salida", "Km 1 en <span class='pace'>3:57–3:59</span>. No salgas a 3:40 por la euforia", "Km 2–4 clavados a <span class='pace'>3:59</span>, es donde se gana o se pierde", "Último km: todo lo que quede"],
       tip: "Apunta aquí tu tiempo final." },
   ]},
 ];
